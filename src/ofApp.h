@@ -5,6 +5,7 @@
 #include "ofxDatGui.h"
 #include "ofxDither.h"
 #include "ui.hpp"
+#include "imageProcess.hpp"
 
 
 
@@ -29,8 +30,19 @@ class ofApp : public ofBaseApp{
         void loadVideo(ofxDatGuiButtonEvent e);
         void setVideoPos(ofxDatGuiSliderEvent e);
         void setVideoVol(ofxDatGuiSliderEvent e);
+        void setFxType(ofxDatGuiDropdownEvent e);
+    void playCtrl(ofxDatGuiButtonEvent e);
+    void processImage();
 
     
         ofVideoPlayer   vPlayer;
+        ofImage rawImg;
+        ofImage greyImg;
+        ofImage ditherImg1;
+        ofImage ditherImg2;
+        ofImage ditherImg3;
+    
+    
+    
 		
 };

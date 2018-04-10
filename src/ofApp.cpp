@@ -1,22 +1,46 @@
 #include "ofApp.h"
-
+imageProcess ip;
 //--------------------------------------------------------------
 void ofApp::setup(){
     UiInitialize();
     ofBackground(255,255,255);
     ofSetVerticalSync(true);
     ofSetFrameRate(30);
+    ip=imageProcess();
 }
 
 void ofApp::loadVideo(ofxDatGuiButtonEvent e){
+    vPlayer.setPaused(true);
         ofFileDialogResult result = ofSystemLoadDialog("Load file");
         if(result.bSuccess) {
             string path = result.getPath();
-            vPlayer.load(path);
-            vPlayer.setLoopState(OF_LOOP_NORMAL);
-            //fingerMovie.setVolume(0);
-            vPlayer.play();
+            if(vPlayer.isLoaded())
+            {
+                vPlayer.closeMovie();
+                vPlayer.load(path);
+                vPlayer.setLoopState(OF_LOOP_NONE);
+                vPlayer.play();
+            }
+            else
+            {
+                vPlayer.load(path);
+                vPlayer.setLoopState(OF_LOOP_NONE);
+                vPlayer.play();
+            }
+
         }
+    vPlayer.setPaused(false);
+}
+
+void ofApp::playCtrl(ofxDatGuiButtonEvent e){
+    if(vPlayer.isPaused())
+    {
+        vPlayer.setPaused(false);
+    }
+    else if(vPlayer.isPlaying())
+    {
+        vPlayer.setPaused(true);
+    }
 }
 
 void ofApp::setVideoPos(ofxDatGuiSliderEvent e)
@@ -35,30 +59,24 @@ void ofApp::setVideoVol(ofxDatGuiSliderEvent e)
         vPlayer.setVolume(e.value);
     }
 }
+void ofApp::setFxType(ofxDatGuiDropdownEvent e)
+{
+    ip.setFxType(static_cast<PROCESS_TYPE>(e.child));
+}
 //--------------------------------------------------------------
 void ofApp::update(){
     vPlayer.update();
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
-    
-    if(vPlayer.isPlaying())
-    {
-    ofSetHexColor(0xFFFFFF);
-    
-    //vPlayer.draw(20,20,320,240);
-    
+
+void ofApp::processImage(){
     ofPixels & pixels = vPlayer.getPixels();
-    
-    
     ofPixels resizedPixels;
     resizedPixels.allocate(256, 160, OF_PIXELS_RGB);
     pixels.resizeTo(resizedPixels);
     
-    int vidWidth = resizedPixels.getWidth();
-    int vidHeight = resizedPixels.getHeight();
-    int nChannels = resizedPixels.getNumChannels();
+
     
     // let's move through the "RGB(A)" char array
     // using the red pixel to control the size of a circle.
@@ -70,21 +88,33 @@ void ofApp::draw(){
     //        }
     //    }
     
-    ofImage oim;
-    ofSetColor(ofColor::white);
-    oim.setFromPixels(resizedPixels);
-    oim.draw(20,20);
-    ofSetColor(ofColor::white);
-    oim.setImageType(OF_IMAGE_GRAYSCALE);
-    oim.draw(350,340);
-    ofxDither od=ofxDither();
-    ofImage dout;
-    od.dither_atkinson(oim, dout);
-    dout.draw(340, 20, 320, 240);
-    od.dither_floyd_steinberg(oim, dout);
-    dout.draw(340+340, 20, 320, 240);
-    od.dither_ordered(oim, dout);
-    dout.draw(340+340+340, 20, 320, 240);
+    rawImg.setFromPixels(resizedPixels);
+    greyImg.clone(rawImg);
+    greyImg.setImageType(OF_IMAGE_GRAYSCALE);
+
+    ip.conduct(&greyImg, &ditherImg1);
+    
+}
+
+void ofApp::draw(){
+    
+    if(vPlayer.isLoaded())
+    {
+    ofSetHexColor(0xFFFFFF);
+    
+        if(vPlayer.isFrameNew())
+        {
+            processImage();
+        }
+        
+        
+        rawImg.draw(20,20);
+        greyImg.draw(350,340);
+        ditherImg1.draw(340, 20, 320, 240);
+//        ditherImg2.draw(340+340, 20, 320, 240);
+//        ditherImg3.draw(340+340+340, 20, 320, 240);
+    
+
     
     ofSetHexColor(0x000000);
     

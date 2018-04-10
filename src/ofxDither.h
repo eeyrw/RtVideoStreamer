@@ -27,6 +27,7 @@ public:
 	void dither_ordered			( ofImage& imageIn, ofImage& imageOut, int mapSize = DITHER_ORDERED_8x8 );
 	void dither_floyd_steinberg	( ofImage& imageIn, ofImage& imageOut );
 	void dither_atkinson		( ofImage& imageIn, ofImage& imageOut );
+    void binary        ( ofImage& imageIn, ofImage& imageOut );
 	
 	unsigned char threshold_map_2x2[ 4 ];
 	unsigned char threshold_map_3x3[ 9 ];

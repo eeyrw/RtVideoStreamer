@@ -12,6 +12,8 @@ ofxDatGuiButton* btnOpenFile;
 ofxDatGuiTextInput* textIpAddr;
 ofxDatGuiSlider* sldFrame;
 ofxDatGuiSlider* sldVol;
+ofxDatGuiButton* btnPlayCtrl;
+ofxDatGuiDropdown* menuFxType;
 
 
 void onTextInputEvent(ofxDatGuiTextInputEvent e)
@@ -26,6 +28,9 @@ void UiInitialize(void)
     btnOpenFile=gui->addButton("OPEN VIDEO FILE");
     btnOpenFile->onButtonEvent(app,&ofApp::loadVideo);
     
+    btnPlayCtrl=gui->addButton("PLAY/PAUSE");
+    btnPlayCtrl->onButtonEvent(app,&ofApp::playCtrl);
+    
     sldFrame = gui->addSlider("VIDEO POS", 0, 1);
     sldFrame->onSliderEvent(app,&ofApp::setVideoPos);
     
@@ -35,7 +40,15 @@ void UiInitialize(void)
     
     textIpAddr=gui->addTextInput("IP Address", "192.168.1.134:346376");
     textIpAddr->onTextInputEvent(&onTextInputEvent);
-    vector<string> options = {"ONE", "TWO", "THREE", "FOUR"};
-    gui->addDropdown("AA",options);
+    
+    vector<string> fxOptions;
+    imageProcess ip=imageProcess();
+    for(auto &item:ip.getFxList())
+    {
+        fxOptions.push_back(item.second);
+    }
+    menuFxType=gui->addDropdown("AA",fxOptions);
+    menuFxType->onDropdownEvent(app,&ofApp::setFxType);
+    menuFxType->select(0);
     gui->addFRM();
 }

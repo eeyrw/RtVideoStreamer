@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D39FBB5207D02CC003A0652 /* imageProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D39FBB3207D02CC003A0652 /* imageProcess.cpp */; };
 		0D5A67AD207CA4E9007C4351 /* ofxDither.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D5A67AB207CA4E7007C4351 /* ofxDither.cpp */; };
 		0D5A67B1207CA562007C4351 /* ui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D5A67AF207CA562007C4351 /* ui.cpp */; };
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
@@ -69,6 +70,8 @@
 		0B87BF43E5302005FEF650B6 /* ios.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ios.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/highgui/ios.h; sourceTree = SOURCE_ROOT; };
 		0CEC1FE946DBDBAB82AF6FE3 /* global_motion.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = global_motion.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/videostab/global_motion.hpp; sourceTree = SOURCE_ROOT; };
 		0CF0AA3895D28E97D8A1E4A9 /* ground_truth.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ground_truth.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/ground_truth.h; sourceTree = SOURCE_ROOT; };
+		0D39FBB3207D02CC003A0652 /* imageProcess.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imageProcess.cpp; sourceTree = "<group>"; };
+		0D39FBB4207D02CC003A0652 /* imageProcess.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = imageProcess.hpp; sourceTree = "<group>"; };
 		0D5A67AB207CA4E7007C4351 /* ofxDither.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDither.cpp; sourceTree = "<group>"; };
 		0D5A67AC207CA4E9007C4351 /* ofxDither.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDither.h; sourceTree = "<group>"; };
 		0D5A67AF207CA562007C4351 /* ui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ui.cpp; sourceTree = "<group>"; };
@@ -768,6 +771,8 @@
 			isa = PBXGroup;
 			children = (
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				0D39FBB3207D02CC003A0652 /* imageProcess.cpp */,
+				0D39FBB4207D02CC003A0652 /* imageProcess.hpp */,
 				0D5A67AB207CA4E7007C4351 /* ofxDither.cpp */,
 				0D5A67AC207CA4E9007C4351 /* ofxDither.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -916,6 +921,7 @@
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
+				0D39FBB5207D02CC003A0652 /* imageProcess.cpp in Sources */,
 				0D5A67B1207CA562007C4351 /* ui.cpp in Sources */,
 				63020F16C7E8DED980111241 /* ofxCvImage.cpp in Sources */,
 				D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */,

@@ -57,7 +57,26 @@ ofxDither :: ~ofxDither()
 {
 	//
 }
-
+void ofxDither::binary(ofImage& imageIn, ofImage& imageOut)
+{
+    prepImagesForGreyscale( imageIn, imageOut );
+    
+    int w = imageIn.getWidth();
+    int h = imageIn.getHeight();
+    int t = w * h;
+    
+    
+    for( int i=0; i<t; i++ )
+    {
+        if(imageInPixels[i]>0x50)
+            imageOutPixels[i]=0xFF;
+        else
+            imageOutPixels[i]=0;
+    }
+    
+    
+    finishGreyscale( imageIn, imageOut );
+}
 ////////////////////////////////////////////////////////////////////
 //
 //	ORDERED DITHER => http://en.wikipedia.org/wiki/Ordered_dithering
